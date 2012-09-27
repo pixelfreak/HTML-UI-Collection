@@ -7,13 +7,18 @@
 			this.each(function(i)
 			{
 				var $select = $(this);
-				var $this = $select.wrap('<div class="selectmenu '+ $select[0].className +'"></div>').parent();
+				var $this = $select.wrap('<div class="'+ $select[0].className +'"></div>').parent();
 				$select[0].className = '';
+
+				if ($select[0].id != null)
+				{
+					$this[0].id = 'custom-select-container-' + $select[0].id;
+				}
 				
 				var $display = $('<div><span></span></div>').prependTo($this).find('span');
 				if ($select.attr('disabled'))
 				{
-					$display.parent().addClass('disabled');
+					$display.parent().parent().addClass('disabled');
 				}
 				$select.data('display', $display);
 				$display.text($select.find('option:selected').text());
